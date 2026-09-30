@@ -6,7 +6,18 @@
 (function () {
   'use strict';
 
-  const API_BASE = window.location.origin;
+  function getApiBase() {
+    const saved = localStorage.getItem('ANEMIA_API_BASE');
+    if (saved) return saved.replace(/\/+$/, '');
+
+    if (window.location.hostname.endsWith('github.io')) {
+      return 'https://anemia-ai.onrender.com';
+    }
+
+    return window.location.origin;
+  }
+
+  const API_BASE = getApiBase();
   const REQUEST_TIMEOUT_MS = 25000;
 
   // DOM Elements - Navigation & Views

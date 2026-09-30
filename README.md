@@ -1,13 +1,17 @@
 # Anemia AI — Fingernail-Based Anemia Assessment System
 
-[![CI](https://github.com/owner/anemia-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/owner/anemia-ai/actions/workflows/ci.yml)
-[![Tests](https://github.com/owner/anemia-ai/actions/workflows/tests.yml/badge.svg)](https://github.com/owner/anemia-ai/actions/workflows/tests.yml)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?logo=github)](https://wierd-namish.github.io/anemia/)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/wierd-namish/anemia)
+[![CI](https://github.com/wierd-namish/anemia/actions/workflows/ci.yml/badge.svg)](https://github.com/wierd-namish/anemia/actions/workflows/ci.yml)
+[![Tests](https://github.com/wierd-namish/anemia/actions/workflows/tests.yml/badge.svg)](https://github.com/wierd-namish/anemia/actions/workflows/tests.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688.svg)](https://fastapi.tiangolo.com/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.6%20%2B%20CUDA-EE4C2C.svg)](https://pytorch.org/)
 [![Status](https://img.shields.io/badge/Status-Investigational%20Research-orange.svg)](#important-medical-status--disclaimer)
 
 A production-grade, modular Medical-AI system for non-invasive, point-of-care anemia risk screening from fingernail photographs. Combines deep convolutional vision (**EfficientNet-B0 v002**) with handcrafted chromatic feature modeling (**Hugging Face JetX-GT**), empirical logistic fusion, isotonic probability calibration, and locked sensitivity decision thresholds.
+
+🌐 **Live Web Application**: [https://wierd-namish.github.io/anemia/](https://wierd-namish.github.io/anemia/)
 
 ---
 
