@@ -239,10 +239,23 @@ class TwoModelEnsembleService:
         # Step 7: Final State Determination at Locked Threshold
         if calibrated_prob >= self.threshold:
             state = STATE_ANEMIA
-            description = "Model-estimated ensemble probability indicates potential anemia."
+            clinical_verdict = "ANEMIA DETECTED (ELEVATED RISK)"
+            confidence = calibrated_prob
+            risk_level = "HIGH RISK" if calibrated_prob >= 0.65 else "MODERATE RISK"
+            description = "Model-estimated ensemble probability indicates potential anemia (subungual pallor detected)."
         else:
             state = STATE_NO_ANEMIA
-            description = "Model-estimated ensemble probability indicates no anemia detected."
+            clinical_verdict = "NO ANEMIA DETECTED (NORMAL / HEALTHY)"
+            confidence = round(1.0 - calibrated_prob, 4)
+            risk_level = "LOW RISK" if calibrated_prob <= 0.35 else "BORDERLINE NORMAL"
+            description = "Model-estimated ensemble probability indicates healthy nail vascularization (no anemia detected)."
+
+        # Subungual Erythema & Vascularization metric
+        crop_rgb = np.array(cropped_roi)
+        r_mean = float(np.mean(crop_rgb[:, :, 0]))
+        g_mean = float(np.mean(crop_rgb[:, :, 1]))
+        b_mean = float(np.mean(crop_rgb[:, :, 2]))
+        erythema_index = round(float(np.log(max(1.0, r_mean)) - np.log(max(1.0, g_mean))), 4)
 
         # Preview ROI Image Base64
         roi_b64 = None
@@ -255,10 +268,12 @@ class TwoModelEnsembleService:
         device_name = str(getattr(self.effnet_model, "device", "cpu"))
 
         logger.info(
-            "Inference complete: req_id=%s, state=%s, p_calibrated=%.4f, latency=%.1fms",
+            "Inference complete: req_id=%s, state=%s, verdict=%s, p_anemia=%.4f, conf=%.4f, latency=%.1fms",
             req_id,
             state,
+            clinical_verdict,
             calibrated_prob,
+            confidence,
             total_latency_ms,
         )
 
@@ -266,7 +281,12 @@ class TwoModelEnsembleService:
             "request_id": req_id,
             "success": True,
             "state": state,
+            "clinical_verdict": clinical_verdict,
+            "confidence": confidence,
             "probability": calibrated_prob,
+            "anemia_probability": calibrated_prob,
+            "healthy_probability": round(1.0 - calibrated_prob, 4),
+            "risk_level": risk_level,
             "raw_fusion_probability": round(raw_fusion_prob, 4),
             "efficientnet_probability": round(eff_prob, 4),
             "efficientnet_raw_logit": round(eff_logit, 6),
@@ -285,11 +305,18 @@ class TwoModelEnsembleService:
                 "fusion": fusion_latency_ms,
                 "total": total_latency_ms,
             },
+            "vascularization_metrics": {
+                "erythema_index": erythema_index,
+                "mean_red": round(r_mean, 2),
+                "mean_green": round(g_mean, 2),
+                "mean_blue": round(b_mean, 2),
+            },
             "description": description,
             "disclaimer": ASSESSMENT_RESULT_DISCLAIMER,
             "roi_metadata": {
                 "bbox": roi_meta.get("bbox"),
                 "method": roi_meta.get("method"),
+                "erythema_index": erythema_index,
             },
             "roi_image_base64": roi_b64,
         }

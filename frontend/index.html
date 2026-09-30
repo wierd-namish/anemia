@@ -154,49 +154,61 @@
           <!-- Active Assessment Result View -->
           <div id="activeResultState" class="active-result-state hidden">
             
-            <!-- Result Banner (ANEMIA RISK / NON-ANEMIA / INCONCLUSIVE) -->
-            <div id="resultBanner" class="result-banner banner-anemia">
-              <div class="banner-state-label" id="bannerStateLabel">ANEMIA RISK</div>
-              <div class="banner-subtext" id="bannerSubtext">Model-estimated ensemble probability indicates potential anemia.</div>
+            <!-- Primary Clinical Verdict Banner -->
+            <div id="resultBanner" class="result-banner banner-non-anemia">
+              <div class="banner-top-row">
+                <span class="verdict-tag" id="verdictTag">NORMAL / HEALTHY</span>
+                <span class="confidence-badge" id="confidenceBadge">98.4% Confidence</span>
+              </div>
+              <div class="banner-state-label" id="bannerStateLabel">NO ANEMIA DETECTED</div>
+              <div class="banner-subtext" id="bannerSubtext">Subungual nail bed vascularization and hemoglobin color index are within normal healthy limits.</div>
             </div>
 
-            <!-- Primary Metrics Bar -->
+            <!-- Clinical Assessment Key Metrics Grid -->
             <div class="metrics-grid">
               <div class="metric-item">
-                <span class="metric-key">Calibrated Risk</span>
-                <span class="metric-val highlight" id="metricConfidence">--%</span>
+                <span class="metric-key">Primary Diagnosis</span>
+                <span class="metric-val highlight" id="metricDiagnosis">NO ANEMIA</span>
               </div>
               <div class="metric-item">
-                <span class="metric-key">Inference Latency</span>
+                <span class="metric-key">Anemia Risk Score</span>
+                <span class="metric-val" id="metricRiskScore">--%</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-key">Risk Category</span>
+                <span class="metric-val" id="metricRiskCategory">LOW RISK</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-key">Inference Time</span>
                 <span class="metric-val" id="metricLatency">-- ms</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-key">Execution Device</span>
-                <span class="metric-val" id="metricDevice">CUDA</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-key">Locked Threshold</span>
-                <span class="metric-val" id="metricThreshold">&tau; = 0.9000</span>
               </div>
             </div>
 
-            <!-- Probability Confidence Bar -->
+            <!-- Risk Spectrum Gauge (Green / Yellow / Red Zones) -->
             <div id="probBarContainer" class="prob-bar-container">
               <div class="prob-bar-header">
-                <span>Ensemble Probability vs Locked Threshold (0.90)</span>
-                <span id="probBarNumber">--%</span>
+                <span class="gauge-label">Clinical Risk Spectrum:</span>
+                <div class="gauge-legend">
+                  <span class="leg-item leg-green"><span class="leg-dot"></span> Low Risk (&lt;30%)</span>
+                  <span class="leg-item leg-amber"><span class="leg-dot"></span> Borderline (30-60%)</span>
+                  <span class="leg-item leg-red"><span class="leg-dot"></span> High Risk (&gt;60%)</span>
+                </div>
+                <span id="probBarNumber" class="gauge-value font-mono">--%</span>
               </div>
-              <div class="prob-bar-track">
-                <div class="threshold-marker" style="left: 90%;" title="Locked Decision Threshold &tau; = 0.90"></div>
+              <div class="prob-bar-track multi-zone">
+                <div class="zone-bg zone-normal" style="width: 30%;"></div>
+                <div class="zone-bg zone-borderline" style="width: 30%;"></div>
+                <div class="zone-bg zone-elevated" style="width: 40%;"></div>
+                <div class="threshold-marker" style="left: 50%;" title="Balanced Decision Threshold &tau; = 0.50"></div>
                 <div id="probBarFill" class="prob-bar-fill"></div>
               </div>
             </div>
 
             <!-- Inconclusive Alert Box -->
             <div id="inconclusiveNotice" class="inconclusive-notice hidden">
-              <div class="notice-title">⚠️ Screening Inconclusive</div>
+              <div class="notice-title">⚠️ Assessment Inconclusive — Please Retake</div>
               <div id="inconclusiveReasonText" class="notice-body">Input does not appear suitable for fingernail screening.</div>
-              <div class="notice-footer">Ensure uniform natural lighting, avoid flash glare, and center the nail bed.</div>
+              <div class="notice-footer">Tips: Ensure bright uniform lighting, keep camera steady, and frame only the fingernail bed inside the guide reticle.</div>
             </div>
 
             <!-- Live Image Dual Preview (Original vs Cropped ROI) -->

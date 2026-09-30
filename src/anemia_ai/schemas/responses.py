@@ -77,7 +77,12 @@ class PredictionResponse(BaseModel):
     request_id: str = Field(..., description="Unique UUID for request tracing")
     success: bool = Field(..., description="Whether inference completed without fatal error")
     state: str = Field(..., description="Diagnostic state: ANEMIA, NO_ANEMIA, or INCONCLUSIVE")
+    clinical_verdict: Optional[str] = Field(None, description="Clear medical verdict summary")
+    confidence: Optional[float] = Field(None, description="Model confidence in diagnosis [0.0 - 1.0]")
     probability: Optional[float] = Field(None, description="Calibrated anemia risk probability [0.0 - 1.0]")
+    anemia_probability: Optional[float] = Field(None, description="Probability of anemia [0.0 - 1.0]")
+    healthy_probability: Optional[float] = Field(None, description="Probability of healthy/non-anemic [0.0 - 1.0]")
+    risk_level: Optional[str] = Field(None, description="Clinical risk category (LOW RISK / MODERATE RISK / HIGH RISK)")
     raw_fusion_probability: Optional[float] = Field(None, description="Pre-calibration fusion score")
     efficientnet_probability: Optional[float] = Field(None, description="EfficientNet-B0 probability")
     efficientnet_raw_logit: Optional[float] = Field(None, description="EfficientNet-B0 raw output logit")
@@ -90,6 +95,7 @@ class PredictionResponse(BaseModel):
     calibration_version: Optional[str] = Field(None, description="Calibration model version")
     threshold_version: Optional[str] = Field(None, description="Locked threshold version")
     latency_ms: Optional[Union[LatencyBreakdown, Dict[str, float]]] = None
+    vascularization_metrics: Optional[Dict[str, Any]] = None
     description: str = Field(..., description="Human-readable result explanation")
     disclaimer: str = Field(..., description="Medical and regulatory disclaimer")
     roi_metadata: Optional[Union[RoiMetadata, Dict[str, Any]]] = None
