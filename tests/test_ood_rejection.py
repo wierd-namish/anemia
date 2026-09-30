@@ -9,9 +9,14 @@ Tests:
 - Verify NO OOD sample produces ANEMIA or NO_ANEMIA
 """
 
+import sys
 import unittest
 from pathlib import Path
 from PIL import Image
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))
 
 from anemia_ai.config.constants import STATE_INCONCLUSIVE, STATE_ANEMIA, STATE_NO_ANEMIA
 from anemia_ai.inference.pipeline import TwoModelEnsembleService

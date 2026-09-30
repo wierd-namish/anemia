@@ -6,9 +6,14 @@ Tests:
 - Decision boundary assignment
 """
 
+import sys
 import unittest
 import json
 from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))
 
 from anemia_ai.config.constants import (
     DEFAULT_DECISION_THRESHOLD as LOCKED_DIAGNOSTIC_THRESHOLD,

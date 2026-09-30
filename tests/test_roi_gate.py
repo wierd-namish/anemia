@@ -7,10 +7,15 @@ Tests:
 - Non-nail ROI rejection (uniform skin, wood, background)
 """
 
+import sys
 import unittest
+from pathlib import Path
 import numpy as np
 from PIL import Image
-from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))
 
 from anemia_ai.preprocessing.nail_detection import NailDetector
 

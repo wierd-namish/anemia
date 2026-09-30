@@ -3,11 +3,17 @@ Unit tests for Out-of-Distribution (OOD) rejection on uploaded images.
 Verifies that non-nail objects (desk, clothing, wood, random noise) return INCONCLUSIVE.
 """
 
+import sys
 import unittest
 from io import BytesIO
+from pathlib import Path
 import numpy as np
 from PIL import Image
 from fastapi.testclient import TestClient
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))
 
 from anemia_ai.api.app import app
 

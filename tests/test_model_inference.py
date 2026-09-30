@@ -7,12 +7,20 @@ Tests:
 - Deterministic behavior without random hallucinations
 """
 
+import os
+import sys
 import unittest
+from pathlib import Path
 import numpy as np
 from PIL import Image
 
+# Ensure src is always in sys.path for standalone IDE execution
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))
+
+from anemia_ai.config.constants import MODEL_NAME, MODEL_VERSION
 from anemia_ai.inference.pipeline import TwoModelEnsembleService
-from anemia_ai.config.constants import ENSEMBLE_VERSION, MODEL_NAME, MODEL_VERSION
 
 
 class TestModelInference(unittest.TestCase):

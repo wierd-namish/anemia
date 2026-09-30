@@ -7,9 +7,15 @@ Tests:
 - Non-physiological nail polish rejection
 """
 
+import sys
 import unittest
+from pathlib import Path
 import numpy as np
 from PIL import Image
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))
 
 from anemia_ai.preprocessing.image_quality import assess_image_quality
 

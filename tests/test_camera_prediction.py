@@ -2,10 +2,16 @@
 Unit tests for Camera/Single-Image Prediction endpoint.
 """
 
+import sys
 import unittest
 from io import BytesIO
+from pathlib import Path
 from PIL import Image
 from fastapi.testclient import TestClient
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))
 
 from anemia_ai.api.app import app
 
