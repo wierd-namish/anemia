@@ -386,45 +386,47 @@
 
     // Device
     const deviceStr = data.device ? data.device.toUpperCase() : 'CUDA';
-    metricDevice.textContent = deviceStr;
+    if (metricDevice) metricDevice.textContent = deviceStr;
 
     // Threshold
-    const tau = data.threshold !== undefined ? data.threshold.toFixed(4) : '0.9000';
-    metricThreshold.innerHTML = `&tau; = ${tau}`;
+    const tau = data.threshold !== undefined ? data.threshold.toFixed(4) : '0.5000';
+    if (metricThreshold) metricThreshold.innerHTML = `&tau; = ${tau}`;
 
     // Dual Image Preview
-    if (currentOriginalDataUrl) {
+    if (currentOriginalDataUrl && displayOriginalImg) {
       displayOriginalImg.src = currentOriginalDataUrl;
     }
-    if (data.roi_image_base64) {
+    if (data.roi_image_base64 && displayRoiImg) {
       displayRoiImg.src = data.roi_image_base64;
       displayRoiImg.classList.remove('hidden');
-      noRoiPlaceholder.classList.add('hidden');
-    } else {
+      if (noRoiPlaceholder) noRoiPlaceholder.classList.add('hidden');
+    } else if (displayRoiImg) {
       displayRoiImg.classList.add('hidden');
-      noRoiPlaceholder.classList.remove('hidden');
+      if (noRoiPlaceholder) noRoiPlaceholder.classList.remove('hidden');
     }
 
     // Intermediate Panel Values
-    valEffnetLogit.textContent = (data.efficientnet_raw_logit !== undefined) ? data.efficientnet_raw_logit.toFixed(4) : '--';
-    valEffnetProb.textContent = (data.efficientnet_probability !== undefined) ? data.efficientnet_probability.toFixed(4) : '--';
-    valJetxProb.textContent = (data.jetx_gt_probability !== undefined) ? data.jetx_gt_probability.toFixed(4) : '--';
-    valFusionProb.textContent = (data.raw_fusion_probability !== undefined) ? data.raw_fusion_probability.toFixed(4) : '--';
-    valCalibratedProb.textContent = (typeof prob === 'number') ? prob.toFixed(4) : '--';
-    valThreshold.textContent = tau;
-    valFinalState.textContent = state;
+    if (valEffnetLogit) valEffnetLogit.textContent = (data.efficientnet_raw_logit !== undefined) ? data.efficientnet_raw_logit.toFixed(4) : '--';
+    if (valEffnetProb) valEffnetProb.textContent = (data.efficientnet_probability !== undefined) ? data.efficientnet_probability.toFixed(4) : '--';
+    if (valJetxProb) valJetxProb.textContent = (data.jetx_gt_probability !== undefined) ? data.jetx_gt_probability.toFixed(4) : '--';
+    if (valFusionProb) valFusionProb.textContent = (data.raw_fusion_probability !== undefined) ? data.raw_fusion_probability.toFixed(4) : '--';
+    if (valCalibratedProb) valCalibratedProb.textContent = (typeof anemiaProb === 'number') ? anemiaProb.toFixed(4) : '--';
+    if (valThreshold) valThreshold.textContent = tau;
+    if (valFinalState) valFinalState.textContent = state;
 
-    if (data.latency_ms) {
-      valLatencyBreakdown.textContent = `EffNet: ${data.latency_ms.efficientnet}ms | JetX: ${data.latency_ms.jetx_gt}ms | Fusion: ${data.latency_ms.fusion}ms | Total: ${data.latency_ms.total}ms`;
-    } else {
-      valLatencyBreakdown.textContent = `${clientLatencyMs} ms`;
+    if (valLatencyBreakdown) {
+      if (data.latency_ms) {
+        valLatencyBreakdown.textContent = `EffNet: ${data.latency_ms.efficientnet}ms | JetX: ${data.latency_ms.jetx_gt}ms | Fusion: ${data.latency_ms.fusion}ms | Total: ${data.latency_ms.total}ms`;
+      } else {
+        valLatencyBreakdown.textContent = `${clientLatencyMs} ms`;
+      }
     }
 
     // Record to Session History
     recordSessionHistory({
       time: new Date().toLocaleTimeString(),
       state: isAnemia ? 'ANEMIA' : (isNonAnemia ? 'NON-ANEMIA' : 'INCONCLUSIVE'),
-      probStr: probPctStr,
+      probStr: riskPctStr,
       effnetLogit: (data.efficientnet_raw_logit !== undefined) ? data.efficientnet_raw_logit.toFixed(3) : '--',
       jetxProb: (data.jetx_gt_probability !== undefined) ? data.jetx_gt_probability.toFixed(3) : '--',
       latency: `${totalMs}ms`,
