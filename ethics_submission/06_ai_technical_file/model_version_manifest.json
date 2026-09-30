@@ -1,0 +1,19 @@
+{
+  "model_name": "EfficientNet-B0",
+  "model_version": "efficientnet_b0_v001",
+  "architecture": "efficientnet_b0",
+  "backbone_pretrained_source": "ImageNet-1K (torchvision.models.EfficientNet_B0_Weights.DEFAULT)",
+  "head": "Dropout(p=0.3) -> Linear(1280, 1)",
+  "input_shape": [3, 224, 224],
+  "normalization": {
+    "mean": [0.485, 0.456, 0.406],
+    "std": [0.229, 0.224, 0.225]
+  },
+  "calibration_method": "Isotonic Regression (isotonic_regression_v001)",
+  "operating_threshold": 0.48,
+  "aggregation_strategy": "mean_calibrated_probability",
+  "state_space": ["ANEMIA", "NO_ANEMIA", "INCONCLUSIVE"],
+  "frozen_checkpoint_path": "experiments/efficientnet_b0_v001/best_model.pth",
+  "calibrator_artifact_path": "configs/calibrator_isotonic.joblib",
+  "threshold_config_path": "configs/diagnostic_threshold.json"
+}

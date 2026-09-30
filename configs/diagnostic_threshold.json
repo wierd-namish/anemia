@@ -1,0 +1,41 @@
+{
+  "selected_model": "efficientnet_b0",
+  "selected_threshold": 0.48,
+  "selection_method": "Maximum Specificity on Validation Set constrained to Sensitivity >= 90.0%",
+  "validation_metrics_at_threshold": {
+    "accuracy": 0.8942,
+    "sensitivity": 0.9183,
+    "sensitivity_ci": [
+      0.8832,
+      0.9516
+    ],
+    "specificity": 0.8553,
+    "specificity_ci": [
+      0.7986,
+      0.9107
+    ],
+    "ppv": 0.9112,
+    "npv": 0.8662,
+    "f1": 0.9147,
+    "roc_auc": 0.9526,
+    "roc_auc_ci": [
+      0.9355,
+      0.9698
+    ],
+    "pr_auc": 0.9682,
+    "pr_auc_ci": [
+      0.954,
+      0.9814
+    ],
+    "brier_score": 0.1041,
+    "confusion_matrix": {
+      "tp": 236,
+      "fp": 23,
+      "tn": 136,
+      "fn": 21
+    }
+  },
+  "calibration_method": "Isotonic Regression",
+  "calibrated_ece": 0.0578,
+  "calibrated_brier": 0.0881
+}

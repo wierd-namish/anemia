@@ -1,0 +1,15 @@
+{
+  "model_type": "MLP",
+  "hidden_layers": [
+    128,
+    64
+  ],
+  "optimal_threshold": 0.1,
+  "expected_accuracy": 0.73,
+  "expected_recall": 0.9,
+  "expected_specificity": 0.46,
+  "expected_f1": 0.808,
+  "auc": 0.7504,
+  "n_features": 27,
+  "training_samples": 3406
+}

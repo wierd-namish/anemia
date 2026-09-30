@@ -1,0 +1,26 @@
+{
+  "model_version": "ensemble_v003",
+  "primary_model": "efficientnet_b0_v002",
+  "secondary_model": "JetX-GT/nail-anemia-detector",
+  "calibration_version": "isotonic_regression_v003",
+  "locked_threshold": 0.9,
+  "target_sensitivity": 0.9,
+  "derived_on": "validation_split",
+  "validation_metrics": {
+    "n_samples": 416,
+    "accuracy": 1.0,
+    "tp": 257,
+    "tn": 159,
+    "fp": 0,
+    "fn": 0,
+    "sensitivity": 1.0,
+    "specificity": 1.0,
+    "ppv": 1.0,
+    "npv": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "brier_score": 0.0,
+    "threshold": 0.9
+  }
+}

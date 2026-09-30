@@ -1,0 +1,21 @@
+{
+  "model_name": "JetX-GT Nail Anemia Detector",
+  "source": "Hugging Face Hub (JetX-GT/nail-anemia-detector)",
+  "architecture": "StandardScaler + Multi-Layer Perceptron (28 Color/Texture Features)",
+  "artifacts": {
+    "mlp_model.joblib": {
+      "sha256": "d81d660e46fadc644b94f0683a30ec8b88bb44001dca1a43a051d95711ea636e",
+      "path": "models/jetx_gt/mlp_model.joblib"
+    },
+    "feature_scaler.joblib": {
+      "sha256": "2089f87388ab2ab47a46fa825dd1f4222301c238b75f80b11da5261569a9b7cf",
+      "path": "models/jetx_gt/feature_scaler.joblib"
+    },
+    "model_metadata.json": {
+      "sha256": "dac21daf75d75e64a1329a1b802613d0859fa42194ff7f4c7f07bb7fec96677f",
+      "path": "models/jetx_gt/model_metadata.json"
+    }
+  },
+  "status": "active_secondary",
+  "synced_at": "2026-09-30T00:00:00Z"
+}

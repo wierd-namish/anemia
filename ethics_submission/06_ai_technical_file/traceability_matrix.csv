@@ -1,0 +1,11 @@
+component,version,source,locked,validation_reference
+model_backbone,efficientnet_b0_v001,TorchVision / PyTorch,true,reports/model_comparison_report.md
+classifier_head,efficientnet_b0_v001,Linear(1280 to 1),true,reports/model_comparison_report.md
+model_weights,efficientnet_b0_v001,experiments/efficientnet_b0_v001/best_model.pth,true,reports/final_governance_consistency_audit.md
+probability_calibrator,isotonic_regression_v001,configs/calibrator_isotonic.joblib,true,reports/calibration_report.md
+operating_threshold,locked_tau_0.48,configs/diagnostic_threshold.json,true,reports/calibration_threshold_audit.md
+preprocessing_pipeline,nail_roi_224x224_rgb_v1.0.0,backend/preprocessing/nail_detection.py,true,reports/explainability_audit.md
+image_quality_gate,quality_gate_v1.0.0,backend/preprocessing/image_quality.py,true,tests/test_quality_gate.py
+patient_aggregation,mean_calibrated_probability,backend/model/inference_pipeline.py,true,reports/statistical_ci_audit.md
+backend_api,fastapi_v1.0.0,backend/app.py,true,tests/test_api.py
+mobile_frontend,frontend_camera_v1.0.0,frontend/index.html & app.js,true,reports/phase_5_acceptance_test.md

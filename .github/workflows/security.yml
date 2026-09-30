@@ -1,0 +1,53 @@
+name: Security & Privacy Audit
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0' # Weekly scan
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Run Repository Secret and Privacy Scan
+      run: |
+        python -c "
+        import os, re, sys
+        patterns = [
+            re.compile(r'(?i)(api[_-]?key|secret|password|bearer|credential)\s*[:=]\s*[\'\"][^\'\"]{8,}'),
+            re.compile(r'(?i)ghp_[a-zA-Z0-9]{36}'),
+            re.compile(r'(?i)AKIA[0-9A-Z]{16}'),
+        ]
+        hits = []
+        for root, _, files in os.walk('.'):
+            if any(x in root for x in ['__pycache__', '.git', '.pytest_cache', 'Fingernails']):
+                continue
+            for f in files:
+                if f.endswith(('.pyc', '.joblib', '.pth', '.pt', '.png', '.jpg', '.jpeg')):
+                    continue
+                p = os.path.join(root, f)
+                try:
+                    with open(p, 'r', encoding='utf-8', errors='ignore') as fh:
+                        for lno, line in enumerate(fh, 1):
+                            for pat in patterns:
+                                if pat.search(line):
+                                    hits.append((p, lno, line.strip()))
+                except Exception:
+                    pass
+        if hits:
+            print(f'Security Scan FAIL: {len(hits)} hits found:')
+            for h in hits:
+                print(f'  {h[0]}:{h[1]} -> {h[2][:60]}')
+            sys.exit(1)
+        print('Security Scan PASS: Zero secrets found.')
+        "

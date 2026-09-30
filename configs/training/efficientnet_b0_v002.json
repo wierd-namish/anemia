@@ -1,0 +1,13 @@
+{
+  "model_name": "EfficientNet-B0",
+  "model_version": "efficientnet_b0_v002",
+  "architecture": "efficientnet_b0",
+  "seed": 42,
+  "use_cuda": true,
+  "use_amp": true,
+  "batch_size": 64,
+  "stage1_epochs": 15,
+  "stage2_epochs": 40,
+  "calibration_method": "isotonic",
+  "output_dir": "experiments/efficientnet_b0_v002"
+}

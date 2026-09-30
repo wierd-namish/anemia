@@ -1,0 +1,31 @@
+{
+  "n_patients": 56,
+  "n_bootstraps": 2000,
+  "threshold": 0.9,
+  "metrics": {
+    "roc_auc": {
+      "mean": 1.0,
+      "median": 1.0,
+      "ci_lower_95": 1.0,
+      "ci_upper_95": 1.0
+    },
+    "sensitivity": {
+      "mean": 0.9431957860477997,
+      "median": 0.9459459459459459,
+      "ci_lower_95": 0.8611111111111112,
+      "ci_upper_95": 1.0
+    },
+    "specificity": {
+      "mean": 1.0,
+      "median": 1.0,
+      "ci_lower_95": 1.0,
+      "ci_upper_95": 1.0
+    },
+    "accuracy": {
+      "mean": 0.963375,
+      "median": 0.9642857142857143,
+      "ci_lower_95": 0.9107142857142857,
+      "ci_upper_95": 1.0
+    }
+  }
+}

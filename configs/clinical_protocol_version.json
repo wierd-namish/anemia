@@ -1,0 +1,30 @@
+{
+  "protocol_version": "2.1",
+  "protocol_date": "2026-09-30",
+  "protocol_title": "Prospective Multi-Center Clinical Validation of an AI Fingernail Assessment System for Pediatric Anemia Screening in Primary Healthcare Settings",
+  "intended_population": "Children aged 6 to 59 months in Ghana / West Africa",
+  "model_name": "EfficientNet-B0",
+  "model_version": "efficientnet_b0_v001",
+  "calibration_method": "Isotonic Regression",
+  "calibration_version": "isotonic_regression_v001",
+  "operating_threshold": 0.48,
+  "threshold_version": "locked_tau_0.48",
+  "patient_aggregation_strategy": "mean_calibrated_probability",
+  "preprocessing_version": "nail_roi_224x224_rgb_v1.0.0",
+  "development_dataset_version": "frozen_ghana_cohort_552_patients",
+  "sample_size_target": {
+    "enrolled_participants": 350,
+    "evaluable_participants": 300,
+    "target_anemia_positive": 150,
+    "target_non_anemic": 150
+  },
+  "primary_reference_standard": "Sysmex XN-350 / Sysmex XN-550 Automated Hematology Analyzers (Venous EDTA whole blood)",
+  "secondary_comparator": "HemoCue Hb 301 Point-of-Care Hemoglobinometer (Capillary blood)",
+  "site_analyzer_mapping": {
+    "Site_A_Tertiary": "Sysmex XN-550 (Princess Marie Louise / Korle Bu Teaching Hospital)",
+    "Site_B_District": "Sysmex XN-350 (Ga West Municipal Hospital)",
+    "Site_C_Rural": "Sysmex XN-350 (Central Lab cold-chain transit within 4 hours)"
+  },
+  "regulatory_status": "Prepared for ethics submission",
+  "ethics_status": "PENDING ETHICS APPROVAL"
+}

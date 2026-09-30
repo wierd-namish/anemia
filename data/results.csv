@@ -1,0 +1,6 @@
+filename,raw_logit,class_0_prob,class_1_prob,raw_score,decision_thresh_0_10,decision_thresh_0_255,feat_min,feat_max,feat_mean,quality_passed,quality_reason
+01_known_anemia_nail.jpg,-16.70235443,0.9999999442481078,0.0000000557518922,0.000000,No anemia pattern detected,No anemia pattern detected,0.0383,210.0300,53.0430,False,Image is blurry. Please hold camera steady and tap to focus on the nail bed.
+02_known_healthy_nail.jpg,2.75462270,0.0598261078597274,0.9401738921402726,0.940174,Anemia-associated pattern,Anemia-associated pattern,-4.5536,201.0032,53.0549,True,Image quality acceptable for screening.
+03_normal_index_nail.jpg,-11.06675243,0.9999843770263457,0.0000156229736544,0.000016,No anemia pattern detected,No anemia pattern detected,0.0743,254.8860,53.0921,False,Image is blurry. Please hold camera steady and tap to focus on the nail bed.
+04_poor_quality_blurry.jpg,3.87430215,0.0203462584585564,0.9796537415414436,0.979654,Anemia-associated pattern,Anemia-associated pattern,0.0000,180.0000,57.9583,False,Image is blurry. Please hold camera steady and tap to focus on the nail bed.
+05_background_desk.jpg,12.83682442,0.0000026609507399,0.9999973390492601,0.999997,Anemia-associated pattern,Anemia-associated pattern,-0.0077,138.2778,27.3304,True,Image quality acceptable for screening.

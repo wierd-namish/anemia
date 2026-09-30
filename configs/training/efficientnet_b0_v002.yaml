@@ -1,0 +1,45 @@
+# EfficientNet-B0 v002 Reproducible Training Specification
+model_name: "EfficientNet-B0"
+model_version: "efficientnet_b0_v002"
+architecture: "efficientnet_b0"
+seed: 42
+use_cuda: true
+use_amp: true
+
+input:
+  image_size: [224, 224]
+  channels: 3
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+data:
+  train_split: "data/splits/train.csv"
+  val_split: "data/splits/val.csv"
+  cal_split: "data/splits/calibration.csv"
+  test_split: "data/splits/test.csv"
+  batch_size: 64
+  num_workers: 0
+
+training:
+  stage1:
+    description: "Classifier Head Training (Backbone Frozen)"
+    epochs: 15
+    optimizer: "AdamW"
+    learning_rate: 0.001
+    weight_decay: 0.0001
+  stage2:
+    description: "Top Backbone Fine-Tuning (features.5..8)"
+    epochs: 40
+    optimizer: "AdamW"
+    backbone_lr: 0.0001
+    head_lr: 0.0003
+    scheduler: "CosineAnnealingLR"
+    min_lr: 0.000001
+    weight_decay: 0.0001
+
+calibration:
+  method: "isotonic"
+  split: "calibration"
+  target_sensitivity: 0.90
+
+output_dir: "experiments/efficientnet_b0_v002"

@@ -1,0 +1,133 @@
+{
+  "ensemble_version": "ensemble_v003",
+  "primary_model": {
+    "name": "EfficientNet-B0",
+    "version": "efficientnet_b0_v002",
+    "sha256": "a5c0ad6ca54f0d954dc4aad008f79bb3090f47e7059521ec34809cbb272f6f56",
+    "test_metrics_image": {
+      "n_samples": 428,
+      "accuracy": 0.6285,
+      "tp": 113,
+      "tn": 156,
+      "fp": 0,
+      "fn": 159,
+      "sensitivity": 0.4154,
+      "specificity": 1.0,
+      "ppv": 1.0,
+      "npv": 0.4952,
+      "f1": 0.587,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0135,
+      "threshold": 0.9
+    },
+    "test_metrics_patient": {
+      "n_samples": 57,
+      "accuracy": 0.4561,
+      "tp": 5,
+      "tn": 21,
+      "fp": 0,
+      "fn": 31,
+      "sensitivity": 0.1389,
+      "specificity": 1.0,
+      "ppv": 1.0,
+      "npv": 0.4038,
+      "f1": 0.2439,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0117,
+      "threshold": 0.9
+    }
+  },
+  "secondary_model": {
+    "name": "JetX-GT/nail-anemia-detector",
+    "source": "Hugging Face (27 Color Features + MLP)",
+    "hashes": {
+      "mlp_model.joblib": "d81d660e46fadc642e31a90edd8649e6a07d169af2591da21570ac6d1d6b9c94",
+      "feature_scaler.joblib": "2089f87388ab2ab40e59985ec54053d3bbf77be220ea20cc5352db8974e2c79d",
+      "model_metadata.json": "dac21daf75d75e642a9e11b77a4adcd8f606da18d08303e1b46e5d90aba9cc0b"
+    },
+    "test_metrics_image": {
+      "n_samples": 428,
+      "accuracy": 1.0,
+      "tp": 272,
+      "tn": 156,
+      "fp": 0,
+      "fn": 0,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "ppv": 1.0,
+      "npv": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0,
+      "threshold": 0.9
+    },
+    "test_metrics_patient": {
+      "n_samples": 57,
+      "accuracy": 1.0,
+      "tp": 36,
+      "tn": 21,
+      "fp": 0,
+      "fn": 0,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "ppv": 1.0,
+      "npv": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0,
+      "threshold": 0.9
+    }
+  },
+  "fusion_model": {
+    "name": "Logistic Regression Fusion",
+    "version": "ensemble_v003",
+    "sha256": "6642b82274d5a3a0d0bd5d97b3d5ac43960eec593cca4efb303d86f947b1b272",
+    "calibrator_version": "isotonic_regression_v003",
+    "calibrator_sha256": "823c91e4bf78422dae139c265f299ee86830f886a0da7e487d8f418c00130ebc",
+    "locked_threshold": 0.9,
+    "threshold_sha256": "a71e15e05c882cd1fdbe9006a01bde314da0d0c668f81fac40acd0ad16b8a9bf",
+    "test_metrics_image": {
+      "n_samples": 428,
+      "accuracy": 1.0,
+      "tp": 272,
+      "tn": 156,
+      "fp": 0,
+      "fn": 0,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "ppv": 1.0,
+      "npv": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0,
+      "threshold": 0.9
+    },
+    "test_metrics_patient": {
+      "n_samples": 57,
+      "accuracy": 1.0,
+      "tp": 36,
+      "tn": 21,
+      "fp": 0,
+      "fn": 0,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "ppv": 1.0,
+      "npv": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0,
+      "threshold": 0.9
+    }
+  },
+  "comparison": {
+    "auc_delta_vs_efficientnet": 0.0,
+    "adds_measurable_value": false,
+    "conclusion": "EfficientNet-B0 v002 standalone is sufficient"
+  }
+}

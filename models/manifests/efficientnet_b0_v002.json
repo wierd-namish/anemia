@@ -1,0 +1,20 @@
+{
+  "model_name": "EfficientNet-B0",
+  "model_version": "efficientnet_b0_v002",
+  "architecture": "torchvision.models.efficientnet_b0",
+  "input_type": "Fingernail ROI (224x224 RGB)",
+  "input_size": [224, 224, 3],
+  "normalization": {
+    "mean": [0.485, 0.456, 0.406],
+    "std": [0.229, 0.224, 0.225]
+  },
+  "training_framework": "PyTorch 2.6.0+cu124",
+  "checkpoint_path": "experiments/efficientnet_b0_v002/best_model.pth",
+  "sha256": "a5c0ad6ca54f0d954dc4aad008f79bb3090f47e7059521ec34809cbb272f6f56",
+  "calibration_version": "isotonic_regression_v002",
+  "calibrator_path": "configs/calibrator_isotonic_v002.joblib",
+  "locked_threshold_version": "locked_tau_v002",
+  "locked_threshold": 0.50,
+  "status": "production_vision_backbone",
+  "created_at": "2026-09-28T00:00:00Z"
+}

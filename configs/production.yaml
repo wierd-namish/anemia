@@ -1,0 +1,26 @@
+# Anemia AI — Production Configuration
+environment: production
+log_level: INFO
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins:
+    - "https://anemia-ai.internal"
+    - "http://localhost:8000"
+
+model:
+  active_pipeline: ensemble_v003
+  primary_vision_model: efficientnet_b0_v002
+  secondary_model: JetX-GT/nail-anemia-detector
+  device: cuda
+  use_amp: true
+
+quality_gate:
+  min_width: 128
+  min_height: 128
+  blur_laplacian_threshold: 5.0
+  underexposure_threshold: 40.0
+  overexposure_threshold: 230.0
+  max_glare_ratio: 0.20
+  max_polish_saturation_ratio: 0.15

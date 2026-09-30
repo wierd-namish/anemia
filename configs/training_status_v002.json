@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "stage": 2,
+  "epoch": 55,
+  "total_epochs": 55,
+  "elapsed_seconds": 1263.0,
+  "elapsed_formatted": "00:21:02",
+  "eta_seconds": 0,
+  "best_epoch": 1,
+  "best_val_auc": 1.0,
+  "checkpoint_sha256": "a5c0ad6ca54f0d954dc4aad008f79bb3090f47e7059521ec34809cbb272f6f56",
+  "gpu_name": "NVIDIA GeForce RTX 3070 Laptop GPU",
+  "checkpoint_path": "C:\\Users\\Asus\\MYPASS\\experiments\\efficientnet_b0_v002\\best_model.pth"
+}

@@ -1,0 +1,25 @@
+scenario,hard_category,effnet_prob,jetx_prob,fusion_prob,calibrated_prob,cct_proxy,blur_score,emb_z_score,description
+Live Phone 1: Daylight Ambient Close-up,NORMAL,0.8172,1.0,1.0,0.999,1.048,85.08,0.948,EffNet=0.82 vs JetX=1.00 | CCT=1.048 | Cat=NORMAL
+Live Phone 2: Warm Indoor Incandescent (2700K),BRANCH DISAGREEMENT,0.6792,0.0009,0.0028,0.001,1.366,32.42,1.095,EffNet=0.68 vs JetX=0.00 | CCT=1.366 | Cat=BRANCH DISAGREEMENT
+Live Phone 3: Cool Office Fluorescent (6500K),LIKELY COLOR SHIFT,0.6145,1.0,1.0,0.999,0.789,75.47,0.986,EffNet=0.61 vs JetX=1.00 | CCT=0.789 | Cat=LIKELY COLOR SHIFT
+Live Phone 4: Slight Smartphone Underexposure,NORMAL,0.6536,1.0,1.0,0.999,1.133,49.71,0.942,EffNet=0.65 vs JetX=1.00 | CCT=1.133 | Cat=NORMAL
+Live Phone 5: Slight Smartphone Overexposure,LIKELY IMAGE QUALITY,0.7553,1.0,1.0,0.999,1.171,108.06,1.111,EffNet=0.76 vs JetX=1.00 | CCT=1.171 | Cat=LIKELY IMAGE QUALITY
+Live Phone 6: Distant Finger with Background,NORMAL,0.6799,1.0,1.0,0.999,1.0,34.71,0.974,EffNet=0.68 vs JetX=1.00 | CCT=1.0 | Cat=NORMAL
+Live Phone 7: Off-center Nail Position,NORMAL,0.7709,1.0,1.0,0.999,1.012,67.18,0.882,EffNet=0.77 vs JetX=1.00 | CCT=1.012 | Cat=NORMAL
+Live Phone 8: Low Light / High ISO Noise,NORMAL,0.7322,1.0,1.0,0.999,1.027,75.26,0.94,EffNet=0.73 vs JetX=1.00 | CCT=1.027 | Cat=NORMAL
+Live Phone 9: High Contrast Smartphone HDR,NORMAL,0.7827,1.0,1.0,0.999,1.065,147.48,1.042,EffNet=0.78 vs JetX=1.00 | CCT=1.065 | Cat=NORMAL
+Live Phone 10: Pale Fingernail Live Stream,NORMAL,0.6866,1.0,1.0,0.999,1.025,76.27,0.945,EffNet=0.69 vs JetX=1.00 | CCT=1.025 | Cat=NORMAL
+Live Phone 11: Pink/Vascularized Nail Live,BRANCH DISAGREEMENT,0.6402,0.0,0.0001,0.001,1.451,82.61,1.067,EffNet=0.64 vs JetX=0.00 | CCT=1.451 | Cat=BRANCH DISAGREEMENT
+Live Phone 12: Mixed Lighting (Window + Lamp),NORMAL,0.7693,1.0,1.0,0.999,1.027,46.33,0.948,EffNet=0.77 vs JetX=1.00 | CCT=1.027 | Cat=NORMAL
+Live Phone 13: Finger On White Desk Background,NORMAL,0.7111,1.0,1.0,0.999,1.028,45.37,0.931,EffNet=0.71 vs JetX=1.00 | CCT=1.028 | Cat=NORMAL
+Live Phone 14: Finger On Wood Grain Surface,BRANCH DISAGREEMENT,0.6542,0.0,0.0001,0.001,1.417,43.68,1.094,EffNet=0.65 vs JetX=0.00 | CCT=1.417 | Cat=BRANCH DISAGREEMENT
+Live Phone 15: Slight Motion Blur Frame,LIKELY IMAGE QUALITY,0.6006,0.9995,0.998,0.9975,1.054,1.95,1.0,EffNet=0.60 vs JetX=1.00 | CCT=1.054 | Cat=LIKELY IMAGE QUALITY
+Live Phone 16: Shadow Falling on Half Nail,NORMAL,0.6489,1.0,1.0,0.999,1.025,77.54,0.951,EffNet=0.65 vs JetX=1.00 | CCT=1.025 | Cat=NORMAL
+Live Phone 17: Front Camera Low Contrast,NORMAL,0.6775,1.0,1.0,0.999,1.034,76.84,0.901,EffNet=0.68 vs JetX=1.00 | CCT=1.034 | Cat=NORMAL
+Live Phone 18: High Saturation Vivid Display,NORMAL,0.6438,0.9884,0.976,0.9754,1.232,100.38,1.028,EffNet=0.64 vs JetX=0.99 | CCT=1.232 | Cat=NORMAL
+Live Phone 19: Vertical Smartphone Portrait (9:16),NORMAL,0.6829,1.0,1.0,0.999,1.223,34.4,0.96,EffNet=0.68 vs JetX=1.00 | CCT=1.223 | Cat=NORMAL
+Live Phone 20: Camera Flash Direct Glare,NORMAL,0.7035,1.0,1.0,0.999,1.031,75.34,1.024,EffNet=0.70 vs JetX=1.00 | CCT=1.031 | Cat=NORMAL
+Live Phone 21: Mild Desaturation / Winter Pallor,BRANCH DISAGREEMENT,0.5786,1.0,1.0,0.999,1.033,84.73,0.86,EffNet=0.58 vs JetX=1.00 | CCT=1.033 | Cat=BRANCH DISAGREEMENT
+Live Phone 22: High Redness / Warm Flush,NORMAL,0.7987,1.0,1.0,0.999,1.047,76.91,0.874,EffNet=0.80 vs JetX=1.00 | CCT=1.047 | Cat=NORMAL
+Live Phone 23: 4K Sensor Downsampled,NORMAL,0.7307,1.0,1.0,0.999,1.025,20.95,0.854,EffNet=0.73 vs JetX=1.00 | CCT=1.025 | Cat=NORMAL
+Live Phone 24: Direct Sunlight Glint,NORMAL,0.7314,1.0,1.0,0.999,1.022,78.09,0.943,EffNet=0.73 vs JetX=1.00 | CCT=1.022 | Cat=NORMAL

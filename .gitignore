@@ -1,0 +1,78 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# Python virtual environments & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Linting Caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+
+# IDE & OS Metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs & Temporary files
+*.log
+*.tmp
+tmp/
+
+# Large Model Weights & Checkpoints (Managed via Manifests & Downloaders)
+*.pth
+*.pt
+*.onnx
+*.safetensors
+*.bin
+experiments/**/*.pth
+backend/models/pretrained/**
+
+# Raw Clinical & Patient Datasets (Strictly Excluded)
+Fingernails/
+data/raw/
+data/processed/
+data/private/
+data/final_manifest.csv
+data/metadata.csv
+
+# Retain tracked documentation, configs, and sample assets
+!data/README.md
+!data/samples/**
+!data/splits/**
+!models/README.md
+!models/manifests/**
+!configs/**

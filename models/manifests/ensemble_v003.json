@@ -1,0 +1,16 @@
+{
+  "model_name": "Two-Model Ensemble Pipeline",
+  "model_version": "ensemble_v003",
+  "architecture": "Empirical Logistic Regression Fusion (Deep Vision + 27 Color MLP)",
+  "primary_model": "efficientnet_b0_v002",
+  "secondary_model": "JetX-GT/nail-anemia-detector",
+  "fusion_checkpoint": "configs/ensemble_fusion_v003.joblib",
+  "fusion_sha256": "6642b82274d5a3a0e5b7cb3b9a0710ba51d1844ef1f0ec9f8b2d137353f47b2c",
+  "calibration_version": "isotonic_regression_v003",
+  "calibrator_checkpoint": "configs/calibrator_isotonic_v003.joblib",
+  "calibrator_sha256": "823c91e4bf78422d713c7a33991275bfbf2049d5fc147baef7645b20755fdbca",
+  "locked_threshold_version": "locked_tau_v003",
+  "locked_threshold": 0.90,
+  "status": "production_active",
+  "created_at": "2026-09-30T00:00:00Z"
+}
