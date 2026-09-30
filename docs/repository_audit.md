@@ -109,7 +109,8 @@ MYPASS/
 ## 5. Git Baseline Metadata
 
 - **Branch**: `main`
-- **Initial Baseline Commit**: `0bc38d02a7ff2d7bee7ce99ef4333c667375f817`
-- **Working Tree**: Clean (`git status` reports nothing to commit)
-- **Remote**: Not configured (Local repository initialized and ready for user remote assignment)
+- **Working Tree**: Clean (`git status` reports up to date with origin/main)
+- **Remote Origin**: `https://github.com/wierd-namish/anemia.git`
+- **Push Status**: SUCCESS (`main` branch published to GitHub)
+
 
