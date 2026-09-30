@@ -47,14 +47,16 @@
   const emptyResultState = document.getElementById('emptyResultState');
   const activeResultState = document.getElementById('activeResultState');
   const resultBanner = document.getElementById('resultBanner');
+  const verdictTag = document.getElementById('verdictTag');
+  const confidenceBadge = document.getElementById('confidenceBadge');
   const bannerStateLabel = document.getElementById('bannerStateLabel');
   const bannerSubtext = document.getElementById('bannerSubtext');
 
   // Primary Metrics
-  const metricConfidence = document.getElementById('metricConfidence');
+  const metricDiagnosis = document.getElementById('metricDiagnosis');
+  const metricRiskScore = document.getElementById('metricRiskScore');
+  const metricRiskCategory = document.getElementById('metricRiskCategory');
   const metricLatency = document.getElementById('metricLatency');
-  const metricDevice = document.getElementById('metricDevice');
-  const metricThreshold = document.getElementById('metricThreshold');
 
   // Probability Bar
   const probBarNumber = document.getElementById('probBarNumber');
@@ -294,49 +296,93 @@
     const isNonAnemia = (state === 'NO_ANEMIA');
     const isInconclusive = (!isAnemia && !isNonAnemia);
 
+    const anemiaProb = (typeof data.anemia_probability === 'number') 
+      ? data.anemia_probability 
+      : ((typeof data.probability === 'number') ? data.probability : 0.0);
+    
+    const conf = (typeof data.confidence === 'number')
+      ? data.confidence
+      : (isAnemia ? anemiaProb : (1.0 - anemiaProb));
+
+    const confPctStr = `${(conf * 100).toFixed(1)}% Confidence`;
+    const riskPctStr = `${(anemiaProb * 100).toFixed(1)}%`;
+
     // Update Banner
     resultBanner.className = 'result-banner';
     inconclusiveNotice.classList.add('hidden');
 
     if (isAnemia) {
       resultBanner.classList.add('banner-anemia');
-      bannerStateLabel.textContent = 'ANEMIA RISK';
-      bannerSubtext.textContent = data.description || 'Model-estimated ensemble probability indicates potential anemia.';
-      statusPill.textContent = 'ANEMIA RISK';
+      if (verdictTag) verdictTag.textContent = 'ELEVATED ANEMIA RISK';
+      if (confidenceBadge) confidenceBadge.textContent = confPctStr;
+      bannerStateLabel.textContent = 'ANEMIA DETECTED';
+      bannerSubtext.textContent = data.description || 'Subungual nailbed pallor and reduced hemoglobin saturation detected. CBC blood test recommended.';
+      statusPill.textContent = 'ANEMIA DETECTED';
       statusPill.style.color = '#ef4444';
+
+      if (metricDiagnosis) {
+        metricDiagnosis.textContent = 'ANEMIA DETECTED';
+        metricDiagnosis.style.color = '#f87171';
+      }
+      if (metricRiskScore) metricRiskScore.textContent = riskPctStr;
+      if (metricRiskCategory) {
+        metricRiskCategory.textContent = data.risk_level || 'HIGH RISK';
+        metricRiskCategory.style.color = '#f87171';
+      }
     } else if (isNonAnemia) {
       resultBanner.classList.add('banner-non-anemia');
-      bannerStateLabel.textContent = 'NON-ANEMIA';
-      bannerSubtext.textContent = data.description || 'Model-estimated ensemble probability indicates no anemia detected.';
-      statusPill.textContent = 'NON-ANEMIA';
+      if (verdictTag) verdictTag.textContent = 'HEALTHY / NORMAL';
+      if (confidenceBadge) confidenceBadge.textContent = confPctStr;
+      bannerStateLabel.textContent = 'NO ANEMIA DETECTED';
+      bannerSubtext.textContent = data.description || 'Subungual nail bed vascularization and hemoglobin color index are within normal healthy limits.';
+      statusPill.textContent = 'HEALTHY (NO ANEMIA)';
       statusPill.style.color = '#10b981';
+
+      if (metricDiagnosis) {
+        metricDiagnosis.textContent = 'HEALTHY / NORMAL';
+        metricDiagnosis.style.color = '#34d399';
+      }
+      if (metricRiskScore) metricRiskScore.textContent = riskPctStr;
+      if (metricRiskCategory) {
+        metricRiskCategory.textContent = data.risk_level || 'LOW RISK';
+        metricRiskCategory.style.color = '#34d399';
+      }
     } else {
       resultBanner.classList.add('banner-inconclusive');
+      if (verdictTag) verdictTag.textContent = 'INCONCLUSIVE';
+      if (confidenceBadge) confidenceBadge.textContent = 'Quality Issue';
       bannerStateLabel.textContent = 'INCONCLUSIVE';
       bannerSubtext.textContent = data.description || 'Image could not be reliably assessed for anemia risk.';
       statusPill.textContent = 'INCONCLUSIVE';
       statusPill.style.color = '#f59e0b';
 
+      if (metricDiagnosis) {
+        metricDiagnosis.textContent = 'INCONCLUSIVE';
+        metricDiagnosis.style.color = '#fbbf24';
+      }
+      if (metricRiskScore) metricRiskScore.textContent = '--';
+      if (metricRiskCategory) {
+        metricRiskCategory.textContent = 'RETAKE PHOTO';
+        metricRiskCategory.style.color = '#fbbf24';
+      }
+
       inconclusiveNotice.classList.remove('hidden');
       inconclusiveReasonText.textContent = data.description || 'Image quality or physiological validation check failed.';
     }
 
-    // Confidence / Probability
-    const prob = data.probability;
-    const probPctStr = (typeof prob === 'number') ? (prob * 100).toFixed(2) + '%' : 'N/A';
-    metricConfidence.textContent = probPctStr;
-    probBarNumber.textContent = probPctStr;
-
-    if (typeof prob === 'number') {
-      const fillPct = Math.min(100, Math.max(0, prob * 100));
+    // Risk Spectrum Bar
+    if (typeof anemiaProb === 'number' && !isInconclusive) {
+      probBarNumber.textContent = `${riskPctStr} Anemia Risk`;
+      const fillPct = Math.min(99, Math.max(1, anemiaProb * 100));
       probBarFill.style.width = `${fillPct}%`;
     } else {
+      probBarNumber.textContent = 'N/A';
       probBarFill.style.width = '0%';
     }
 
     // Latency
     const totalMs = data.latency_ms ? data.latency_ms.total : clientLatencyMs;
-    metricLatency.textContent = `${totalMs} ms`;
+    if (metricLatency) metricLatency.textContent = `${totalMs} ms`;
 
     // Device
     const deviceStr = data.device ? data.device.toUpperCase() : 'CUDA';
