@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="description" content="Fingernail Anemia Screening - Investigational AI Research Prototype.">
+  <title>Fingernail Anemia Screening | Live Research Prototype</title>
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-badges">
+        <span class="badge badge-live">
+          <span class="pulse-dot"></span>
+          LIVE MODEL INFERENCE
+        </span>
+        <span class="badge badge-device" id="deviceBadge">
+          ⚡ DEVICE: DETECTING...
+        </span>
+      </div>
+      <h1 class="header-title">FINGERNAIL ANEMIA SCREENING</h1>
+      <p class="header-subtitle">Investigational AI Research Prototype</p>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+      
+      <!-- Input Mode Switcher -->
+      <div class="input-tabs" role="tablist" aria-label="Input Method">
+        <button id="cameraTabBtn" class="tab-btn active" role="tab" aria-selected="true" type="button">
+          <span class="tab-icon">📷</span> LIVE CAMERA
+        </button>
+        <span class="tab-divider">OR</span>
+        <button id="uploadTabBtn" class="tab-btn" role="tab" aria-selected="false" type="button">
+          <span class="tab-icon">📁</span> UPLOAD FINGERNAIL IMAGE
+        </button>
+      </div>
+
+      <!-- Left / Right Grid for Desktop; Stack for Mobile -->
+      <div class="interactive-grid">
+        
+        <!-- SECTION A: IMAGE ACQUISITION -->
+        <section class="card acquisition-card">
+          
+          <!-- Tab 1: Live Camera Viewfinder -->
+          <div id="cameraViewContainer" class="view-panel active">
+            <div class="instruction-box">
+              <span class="instruction-icon">💡</span>
+              <div>
+                <strong>Position Fingernail in Guide</strong>
+                <p>Align the nail bed within the reticle under uniform illumination.</p>
+              </div>
+            </div>
+
+            <div class="camera-viewport">
+              <video id="cameraVideo" playsinline autoplay muted aria-label="Camera Video Stream"></video>
+              <canvas id="captureCanvas" class="hidden"></canvas>
+              
+              <!-- Reticle / Guide Box Overlay -->
+              <div class="camera-reticle">
+                <div class="reticle-box">
+                  <div class="reticle-corner tl"></div>
+                  <div class="reticle-corner tr"></div>
+                  <div class="reticle-corner bl"></div>
+                  <div class="reticle-corner br"></div>
+                  <div class="reticle-laser"></div>
+                  <div class="reticle-caption">NAIL REGION</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="control-actions">
+              <button id="captureBtn" class="btn btn-primary btn-capture" type="button">
+                <span class="btn-shutter"></span> CAPTURE IMAGE
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab 2: File Upload Zone -->
+          <div id="uploadViewContainer" class="view-panel">
+            <div class="instruction-box">
+              <span class="instruction-icon">📂</span>
+              <div>
+                <strong>Select Fingernail Photograph</strong>
+                <p>Supports JPG, PNG, WEBP high-resolution nail photographs.</p>
+              </div>
+            </div>
+
+            <input type="file" id="imageFileInput" accept="image/jpeg,image/png,image/webp" class="hidden">
+            
+            <div id="uploadDropZone" class="upload-dropzone" role="button" tabindex="0">
+              <div id="uploadPlaceholder" class="upload-placeholder">
+                <div class="upload-cloud-icon">☁️</div>
+                <div class="upload-title">Drop fingernail image here or click to browse</div>
+                <div class="upload-hint">Supports JPEG, PNG, WEBP (min 128×128)</div>
+              </div>
+              <div id="uploadPreviewWrapper" class="upload-preview-wrapper hidden">
+                <img id="uploadPreviewImg" alt="Upload preview">
+                <div class="preview-overlay-tag">Image Loaded</div>
+              </div>
+            </div>
+
+            <div class="control-actions">
+              <button id="analyzeUploadBtn" class="btn btn-primary disabled" disabled type="button">
+                ANALYZE UPLOADED IMAGE
+              </button>
+              <button id="reselectUploadBtn" class="btn btn-secondary hidden" type="button">
+                CHOOSE DIFFERENT IMAGE
+              </button>
+            </div>
+          </div>
+
+          <!-- Processing / Scanning State Overlay -->
+          <div id="analyzingOverlay" class="analyzing-overlay hidden">
+            <div class="scanner-spinner">
+              <div class="ring ring-outer"></div>
+              <div class="ring ring-inner"></div>
+              <div class="scanner-icon">🔬</div>
+            </div>
+            <h3 class="analyzing-header">EVALUATING FINGERNAIL</h3>
+            <p class="analyzing-detail">Executing dual-model ensemble pipeline & calibration...</p>
+            <div class="scan-progress-bar">
+              <div class="scan-progress-fill"></div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- SECTION B: SCREENING RESULT & TRANSPARENT AUDIT -->
+        <section class="card result-card">
+          
+          <div class="card-header-bar">
+            <span class="card-header-title">SCREENING ASSESSMENT</span>
+            <span class="status-indicator" id="statusPill">READY</span>
+          </div>
+
+          <!-- Empty State when no inference run yet -->
+          <div id="emptyResultState" class="empty-state">
+            <div class="empty-icon">🩺</div>
+            <h3>No Assessment Generated</h3>
+            <p>Capture a live video frame or upload a nail image to trigger the real-time inference pipeline.</p>
+          </div>
+
+          <!-- Active Assessment Result View -->
+          <div id="activeResultState" class="active-result-state hidden">
+            
+            <!-- Result Banner (ANEMIA RISK / NON-ANEMIA / INCONCLUSIVE) -->
+            <div id="resultBanner" class="result-banner banner-anemia">
+              <div class="banner-state-label" id="bannerStateLabel">ANEMIA RISK</div>
+              <div class="banner-subtext" id="bannerSubtext">Model-estimated ensemble probability indicates potential anemia.</div>
+            </div>
+
+            <!-- Primary Metrics Bar -->
+            <div class="metrics-grid">
+              <div class="metric-item">
+                <span class="metric-key">Calibrated Risk</span>
+                <span class="metric-val highlight" id="metricConfidence">--%</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-key">Inference Latency</span>
+                <span class="metric-val" id="metricLatency">-- ms</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-key">Execution Device</span>
+                <span class="metric-val" id="metricDevice">CUDA</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-key">Locked Threshold</span>
+                <span class="metric-val" id="metricThreshold">&tau; = 0.9000</span>
+              </div>
+            </div>
+
+            <!-- Probability Confidence Bar -->
+            <div id="probBarContainer" class="prob-bar-container">
+              <div class="prob-bar-header">
+                <span>Ensemble Probability vs Locked Threshold (0.90)</span>
+                <span id="probBarNumber">--%</span>
+              </div>
+              <div class="prob-bar-track">
+                <div class="threshold-marker" style="left: 90%;" title="Locked Decision Threshold &tau; = 0.90"></div>
+                <div id="probBarFill" class="prob-bar-fill"></div>
+              </div>
+            </div>
+
+            <!-- Inconclusive Alert Box -->
+            <div id="inconclusiveNotice" class="inconclusive-notice hidden">
+              <div class="notice-title">⚠️ Screening Inconclusive</div>
+              <div id="inconclusiveReasonText" class="notice-body">Input does not appear suitable for fingernail screening.</div>
+              <div class="notice-footer">Ensure uniform natural lighting, avoid flash glare, and center the nail bed.</div>
+            </div>
+
+            <!-- Live Image Dual Preview (Original vs Cropped ROI) -->
+            <div class="image-preview-section">
+              <div class="preview-box">
+                <div class="preview-title">Input Image</div>
+                <div class="preview-img-frame">
+                  <img id="displayOriginalImg" alt="Input nail image">
+                </div>
+              </div>
+              <div class="preview-box">
+                <div class="preview-title">Processed Nail ROI (224×224)</div>
+                <div class="preview-img-frame">
+                  <img id="displayRoiImg" alt="Processed nail ROI">
+                  <span id="noRoiPlaceholder" class="placeholder-tag hidden">ROI Not Extracted</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transparent Inference Values Panel -->
+            <div class="transparent-panel">
+              <div class="transparent-panel-title">
+                <span>⚡ Transparent Pipeline Intermediate Values</span>
+                <span class="panel-subtitle">Current Request Live Trace</span>
+              </div>
+              <div class="intermediate-table">
+                <div class="table-row">
+                  <span class="row-label">EfficientNet-B0 v002 Logit:</span>
+                  <span class="row-value font-mono" id="valEffnetLogit">--</span>
+                </div>
+                <div class="table-row">
+                  <span class="row-label">EfficientNet-B0 Probability:</span>
+                  <span class="row-value font-mono" id="valEffnetProb">--</span>
+                </div>
+                <div class="table-row">
+                  <span class="row-label">JetX-GT Color Probability:</span>
+                  <span class="row-value font-mono" id="valJetxProb">--</span>
+                </div>
+                <div class="table-row">
+                  <span class="row-label">Logistic Fusion v003 Probability:</span>
+                  <span class="row-value font-mono" id="valFusionProb">--</span>
+                </div>
+                <div class="table-row">
+                  <span class="row-label">Isotonic Calibrated Probability:</span>
+                  <span class="row-value font-mono highlight-val" id="valCalibratedProb">--</span>
+                </div>
+                <div class="table-row">
+                  <span class="row-label">Locked Decision Threshold:</span>
+                  <span class="row-value font-mono" id="valThreshold">0.9000</span>
+                </div>
+                <div class="table-row">
+                  <span class="row-label">Final Assessment State:</span>
+                  <span class="row-value font-mono font-bold" id="valFinalState">--</span>
+                </div>
+                <div class="table-row">
+                  <span class="row-label">Latency Breakdown:</span>
+                  <span class="row-value font-mono" id="valLatencyBreakdown">--</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- SECTION C: RECENT ASSESSMENT HISTORY -->
+      <section class="card history-card">
+        <div class="card-header-bar">
+          <span class="card-header-title">SESSION RECENT RESULTS HISTORY</span>
+          <button id="clearHistoryBtn" class="btn-text" type="button">Clear History</button>
+        </div>
+        <div class="history-table-wrapper">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Result</th>
+                <th>Calibrated Risk</th>
+                <th>EffNet Logit</th>
+                <th>JetX-GT</th>
+                <th>Latency</th>
+                <th>Device</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr class="empty-history-row">
+                <td colspan="7">No screening requests recorded in this session.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Persistent Global Medical Research Disclaimer -->
+      <footer class="app-footer">
+        <div class="disclaimer-badge">RESEARCH DISCLAIMER</div>
+        <p class="disclaimer-text">
+          Investigational research prototype for fingernail-based anemia risk screening. Not a standalone clinical diagnostic device.
+          Evaluated retrospectively on pediatric dataset. Confirmatory laboratory hematology (CBC/hemoglobin) and physician consultation are required for clinical diagnosis.
+        </p>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
