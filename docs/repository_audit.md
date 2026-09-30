@@ -82,26 +82,9 @@ MYPASS/
 - `check_patient_leakage.py` -> `src/anemia_ai/evaluation/leakage.py`
 - `app.py` -> `src/anemia_ai/api/app.py`
 
-### B. Files Archived into `unnecessary/`
-- `scripts/audit_all_raw_results.py` -> `unnecessary/archived_scripts/`
-- `scripts/audit_leakage_phash_ssim.py` -> `unnecessary/archived_scripts/`
-- `scripts/fast_ssim_leakage_audit.py` -> `unnecessary/archived_scripts/`
-- `scripts/generate_biological_nail_dataset.py` -> `unnecessary/archived_scripts/`
-- `scripts/prepare_ood_dataset.py` -> `unnecessary/archived_scripts/`
-- `scripts/run_all_experiments_exp02_to_exp15.py` -> `unnecessary/archived_scripts/`
-- `scripts/run_phase_3_5_audit.py` -> `unnecessary/archived_scripts/`
-- `scripts/run_phase_4_5_audit.py` -> `unnecessary/archived_scripts/`
-- `scripts/run_phase_4_complete.py` -> `unnecessary/archived_scripts/`
-- `scripts/debug_constant_prediction.py` -> `unnecessary/debug/`
-- `scripts/diagnose_live_distribution_shift.py` -> `unnecessary/debug/`
-- `scripts/runtime_live_test.py` -> `unnecessary/debug/`
-- `scripts/test_input_dependence_10.py` -> `unnecessary/debug/`
-- `scripts/test_live_demo.py` -> `unnecessary/debug/`
-- `scripts/test_upload_acceptance_5.py` -> `unnecessary/debug/`
-- `scripts/verify_model_freeze.py` -> `unnecessary/debug/`
-- `scripts/verify_real_detection_comprehensive.py` -> `unnecessary/debug/`
-- `scripts/verify_v002_model.py` -> `unnecessary/debug/`
-- `verify_feature_parity.py` -> `unnecessary/debug/`
+### B. Obsolete & Non-Runtime Files Purged
+- Purged 19 obsolete legacy scripts, exploratory pipelines, and temporary debug scripts from repository.
+- Purged build metadata (`*.egg-info`), bytecode caches (`__pycache__`), and temporary test caches.
 
 ### C. Sensitive & Large Datasets Strictly Ignored
 - `Fingernails/` (4,260 raw patient photographs, ~285 MB) — Excluded from Git.
