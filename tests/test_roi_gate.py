@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image
 from pathlib import Path
 
-from backend.preprocessing.nail_detection import NailDetector
+from anemia_ai.preprocessing.nail_detection import NailDetector
 
 
 class TestROIGate(unittest.TestCase):

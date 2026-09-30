@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 from fastapi.testclient import TestClient
 
-from backend.app import app
+from anemia_ai.api.app import app
 
 class TestOODUpload(unittest.TestCase):
     def setUp(self):

@@ -13,15 +13,17 @@ import unittest
 from pathlib import Path
 from PIL import Image
 
-from backend.model.inference_pipeline import DiagnosticInferenceService
-from backend.config import STATE_INCONCLUSIVE, STATE_ANEMIA, STATE_NO_ANEMIA
+from anemia_ai.config.constants import STATE_INCONCLUSIVE, STATE_ANEMIA, STATE_NO_ANEMIA
+from anemia_ai.inference.pipeline import TwoModelEnsembleService
+
+FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures" / "ood"
 
 
 class TestOODRejection(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.service = DiagnosticInferenceService()
+        cls.service = TwoModelEnsembleService()
 
     def test_historical_jetx_wood_desk_regression(self):
         """
@@ -29,25 +31,18 @@ class TestOODRejection(unittest.TestCase):
         Historical JetX-GT baseline assigned 99.99% anemia to wooden background.
         Our clinical pipeline MUST intercept and reject it as INCONCLUSIVE.
         """
-        wood_paths = [
-            Path("tests/fixtures/ood/ood_wood_desk.jpg"),
-            Path("test_ood/ood_wood_desk.jpg"),
-        ]
-        for wp in wood_paths:
-            if wp.exists():
-                img = Image.open(wp)
-                result = self.service.predict_single(img)
-                self.assertEqual(result["state"], STATE_INCONCLUSIVE, f"Failed on {wp.name}: got {result['state']}")
-                self.assertIsNone(result["probability"])
-                self.assertNotEqual(result["state"], STATE_ANEMIA)
-                self.assertNotEqual(result["state"], STATE_NO_ANEMIA)
+        wood_desk = FIXTURES_DIR / "ood_wood_desk.jpg"
+        if wood_desk.exists():
+            img = Image.open(wood_desk)
+            result = self.service.predict_single(img)
+            self.assertEqual(result["state"], STATE_INCONCLUSIVE, f"Failed on {wood_desk.name}: got {result['state']}")
+            self.assertIsNone(result["probability"])
+            self.assertNotEqual(result["state"], STATE_ANEMIA)
+            self.assertNotEqual(result["state"], STATE_NO_ANEMIA)
 
     def test_all_ood_samples_rejection(self):
         """Verify all synthetic/real OOD samples in fixtures are rejected as INCONCLUSIVE."""
-        ood_dir = Path("tests/fixtures/ood")
-        if not ood_dir.exists():
-            ood_dir = Path("test_ood")
-        ood_images = list(ood_dir.glob("*.jpg"))
+        ood_images = list(FIXTURES_DIR.glob("*.jpg"))
         self.assertGreater(len(ood_images), 0, "No OOD test images found")
         
         for img_p in ood_images:

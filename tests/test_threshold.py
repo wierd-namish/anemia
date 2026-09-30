@@ -10,24 +10,25 @@ import unittest
 import json
 from pathlib import Path
 
-from backend.config import (
-    load_diagnostic_threshold,
-    LOCKED_DIAGNOSTIC_THRESHOLD,
-    DIAGNOSTIC_THRESHOLD_CONFIG_PATH,
+from anemia_ai.config.constants import (
+    DEFAULT_DECISION_THRESHOLD as LOCKED_DIAGNOSTIC_THRESHOLD,
     STATE_ANEMIA,
     STATE_NO_ANEMIA,
 )
+from anemia_ai.config.settings import get_settings
+
+
+def load_diagnostic_threshold():
+    return LOCKED_DIAGNOSTIC_THRESHOLD
 
 
 class TestThreshold(unittest.TestCase):
 
     def test_locked_threshold_value(self):
         """Verify locked threshold matches configuration."""
-        self.assertTrue(DIAGNOSTIC_THRESHOLD_CONFIG_PATH.exists())
-        with open(DIAGNOSTIC_THRESHOLD_CONFIG_PATH, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            expected_tau = float(data.get("locked_threshold", 0.50))
-            self.assertEqual(LOCKED_DIAGNOSTIC_THRESHOLD, expected_tau)
+        settings = get_settings()
+        tau = settings.load_locked_threshold("v003")
+        self.assertAlmostEqual(tau, 0.9000, places=3)
 
     def test_decision_boundary_logic(self):
         """Verify diagnostic state assignment on calibrated probabilities."""

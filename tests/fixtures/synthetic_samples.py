@@ -33,6 +33,18 @@ def generate_synthetic_nail(is_anemic: bool = False, size: Tuple[int, int] = (30
     return Image.fromarray(arr)
 
 
+def generate_synthetic_anemia_nail(size: Tuple[int, int] = (224, 224), seed: int = 42) -> Image.Image:
+    """Generates synthetic nail with pale/anemic nail bed tones."""
+    np.random.seed(seed)
+    return generate_synthetic_nail(is_anemic=True, size=size)
+
+
+def generate_synthetic_healthy_nail(size: Tuple[int, int] = (224, 224), seed: int = 42) -> Image.Image:
+    """Generates synthetic nail with vascularized/healthy pink nail bed tones."""
+    np.random.seed(seed)
+    return generate_synthetic_nail(is_anemic=False, size=size)
+
+
 def generate_blurry_image(size: Tuple[int, int] = (300, 300)) -> Image.Image:
     """Generates featureless blurry image with near-zero Laplacian variance."""
     return Image.new("RGB", size, color=(180, 180, 180))

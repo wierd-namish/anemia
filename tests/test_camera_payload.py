@@ -13,7 +13,7 @@ import unittest
 from fastapi import UploadFile, HTTPException
 from PIL import Image
 
-from backend.app import predict_single_nail
+from anemia_ai.api.routes.predict import predict_single_nail
 
 
 class TestCameraPayload(unittest.TestCase):

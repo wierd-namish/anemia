@@ -11,7 +11,7 @@ import unittest
 import numpy as np
 from PIL import Image
 
-from backend.preprocessing.image_quality import assess_image_quality
+from anemia_ai.preprocessing.image_quality import assess_image_quality
 
 
 class TestQualityGate(unittest.TestCase):

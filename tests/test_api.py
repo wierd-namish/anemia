@@ -14,8 +14,10 @@ import unittest
 from fastapi import UploadFile, HTTPException
 from PIL import Image
 
-from backend.app import health_check, get_model_info, predict_single_nail, predict_multiple_nails
-from backend.config import MODEL_VERSION, MODEL_NAME, LOCKED_DIAGNOSTIC_THRESHOLD
+from anemia_ai.api.routes.health import health_check
+from anemia_ai.api.routes.model_info import get_model_info
+from anemia_ai.api.routes.predict import predict_multiple_nails, predict_single_nail
+from anemia_ai.config.constants import ENSEMBLE_VERSION, LOCKED_DIAGNOSTIC_THRESHOLD
 
 
 class TestBackendAPI(unittest.TestCase):

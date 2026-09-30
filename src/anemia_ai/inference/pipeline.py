@@ -90,6 +90,10 @@ class TwoModelEnsembleService:
         # 5. Locked Threshold v003
         self.threshold = self.settings.load_locked_threshold("v003")
 
+    @property
+    def model(self):
+        return self.effnet_model
+
     def is_ready(self) -> bool:
         """Checks if all components are ready for inference."""
         if self.effnet_model is None or self.jetx_model is None or self.calibrator is None:
@@ -269,6 +273,7 @@ class TwoModelEnsembleService:
             "jetx_gt_probability": round(jetx_prob, 4),
             "threshold": self.threshold,
             "device": device_name,
+            "model_name": "EfficientNet-B0 + JetX-GT Ensemble",
             "model_version": ENSEMBLE_VERSION,
             "primary_model": PRIMARY_MODEL_VERSION,
             "secondary_model": SECONDARY_MODEL_VERSION,

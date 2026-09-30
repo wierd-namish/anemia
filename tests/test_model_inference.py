@@ -11,15 +11,15 @@ import unittest
 import numpy as np
 from PIL import Image
 
-from backend.model.inference_pipeline import DiagnosticInferenceService
-from backend.config import MODEL_NAME, MODEL_VERSION
+from anemia_ai.inference.pipeline import TwoModelEnsembleService
+from anemia_ai.config.constants import ENSEMBLE_VERSION, MODEL_NAME, MODEL_VERSION
 
 
 class TestModelInference(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.service = DiagnosticInferenceService()
+        cls.service = TwoModelEnsembleService()
 
     def test_service_initialization(self):
         """Verify diagnostic service initializes model and calibrator."""

@@ -8,6 +8,8 @@ STATE_NO_ANEMIA: str = "NO_ANEMIA"
 STATE_INCONCLUSIVE: str = "INCONCLUSIVE"
 
 # Model and Pipeline Versions
+MODEL_NAME: str = "EfficientNet-B0 + JetX-GT Ensemble"
+MODEL_VERSION: str = "ensemble_v003"
 PRIMARY_MODEL_VERSION: str = "efficientnet_b0_v002"
 SECONDARY_MODEL_VERSION: str = "JetX-GT/nail-anemia-detector"
 ENSEMBLE_VERSION: str = "ensemble_v003"
@@ -27,6 +29,8 @@ GLARE_PIXEL_RATIO_MAX: float = 0.20
 NON_PHYSIOLOGICAL_SATURATION_MAX: float = 0.15
 
 # Default Decision Thresholds
+LOCKED_DIAGNOSTIC_THRESHOLD: float = 0.9000
+DEFAULT_DECISION_THRESHOLD: float = 0.9000
 DEFAULT_DIAGNOSTIC_THRESHOLD: float = 0.50
 BASELINE_BALANCED_THRESHOLD: float = 0.50
 BASELINE_HIGH_SENSITIVITY_THRESHOLD: float = 0.30
