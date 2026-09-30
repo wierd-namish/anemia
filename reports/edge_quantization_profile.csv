@@ -1,3 +1,0 @@
-Precision,Host_Latency_ms,Model_Size_MB
-FP32 (PyTorch Host),26.05,15.58
-INT8 Dynamic Quantized,26.81,6.54

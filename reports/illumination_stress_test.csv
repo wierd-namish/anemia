@@ -1,5 +1,0 @@
-color_temperature,mean_calibrated_prob,samples_tested
-2700K (Warm Incandescent),0.001,20
-4000K (Neutral White),0.1693,17
-5000K (Daylight Horizon),0.9703,19
-6500K (Cool Overcast),0.9988,20

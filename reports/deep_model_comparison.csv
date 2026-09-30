@@ -1,5 +1,0 @@
-model,parameters,model_size_mb,cpu_inference_ms,image_auc,image_pr_auc,image_sensitivity,image_specificity,patient_auc,patient_pr_auc,patient_sensitivity,patient_specificity,patient_ppv,patient_npv,patient_f1,calibrated_ece,robustness_flip_pct
-efficientnet_b0,4008829,15.29,15.76,0.9526,0.9682,0.9183,0.8553,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0578,2.16
-densenet121,6954881,26.53,43.5,0.9354,0.9575,0.9027,0.8113,0.9914,0.9956,0.9714,0.95,0.9714,0.95,0.9714,0.0358,2.16
-mobilenet_v3_large,4203313,16.03,10.88,0.9384,0.956,0.9144,0.8113,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0274,1.68
-resnet50,23510081,89.68,43.37,0.9434,0.9631,0.9105,0.8365,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0314,1.92

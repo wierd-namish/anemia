@@ -1,4 +1,0 @@
-Method,Brier_Score,ECE
-Uncalibrated Raw Fusion,0.009286,0.027475
-Isotonic Regression v003,0.009404,0.028269
-Platt Scaling (Sigmoid),0.021413,0.11494

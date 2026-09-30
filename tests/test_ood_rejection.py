@@ -30,7 +30,7 @@ class TestOODRejection(unittest.TestCase):
         Our clinical pipeline MUST intercept and reject it as INCONCLUSIVE.
         """
         wood_paths = [
-            Path("data/test_images/05_background_desk.jpg"),
+            Path("tests/fixtures/ood/ood_wood_desk.jpg"),
             Path("test_ood/ood_wood_desk.jpg"),
         ]
         for wp in wood_paths:
@@ -43,8 +43,10 @@ class TestOODRejection(unittest.TestCase):
                 self.assertNotEqual(result["state"], STATE_NO_ANEMIA)
 
     def test_all_ood_samples_rejection(self):
-        """Verify all 7 synthetic/real OOD samples in test_ood/ are rejected as INCONCLUSIVE."""
-        ood_dir = Path("test_ood")
+        """Verify all synthetic/real OOD samples in fixtures are rejected as INCONCLUSIVE."""
+        ood_dir = Path("tests/fixtures/ood")
+        if not ood_dir.exists():
+            ood_dir = Path("test_ood")
         ood_images = list(ood_dir.glob("*.jpg"))
         self.assertGreater(len(ood_images), 0, "No OOD test images found")
         

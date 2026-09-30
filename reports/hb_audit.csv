@@ -1,2 +1,0 @@
-dataset_name,total_images,total_patients,hb_measurement_method,hb_reference_cutoff,anemia_positive_images,anemia_negative_images,missing_label_count,invalid_label_count,same_visit_verification
-Ghana Pediatric Cohort (Asare 2022),4260,554,Laboratory blood Hb verification (hospital standard analyzer),< 11.0 g/dL (WHO Pediatric),2679,1581,0,0,Yes (Simultaneous blood draw and photography)

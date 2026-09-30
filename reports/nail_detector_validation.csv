@@ -1,5 +1,0 @@
-sample_name,original_width,original_height,gt_bbox,pred_bbox,detection_method,iou,success
-real_koilonychia_anemia,2713,1694,"(950, 590, 1800, 1200)","(203, 102, 1699, 1592)",contour_nail_detector,0.1995,False
-real_index_nail,2048,1536,"(400, 300, 1600, 1250)","(509, 501, 1279, 1425)",contour_nail_detector,0.4524,True
-sample_healthy_nail,300,300,"(70, 50, 230, 250)","(57, 36, 243, 267)",contour_nail_detector,0.7448,True
-sample_anemic_nail,300,300,"(70, 50, 230, 250)","(18, 18, 282, 282)",contour_nail_detector,0.4591,True
