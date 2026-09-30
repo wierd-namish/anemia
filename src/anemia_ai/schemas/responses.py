@@ -22,6 +22,7 @@ class HealthResponse(BaseModel):
 class ModelInfoResponse(BaseModel):
     """Comprehensive metadata describing the deployed model and training lineage."""
     model: str = Field(..., description="Active ensemble or model name")
+    model_name: Optional[str] = Field(None, description="Alias for active ensemble or model name")
     primary_model: str = Field(..., description="Primary deep learning architecture")
     secondary_model: str = Field(..., description="Secondary handcrafted model")
     fusion_version: str = Field(..., description="Ensemble fusion model version")

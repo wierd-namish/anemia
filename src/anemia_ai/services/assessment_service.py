@@ -62,6 +62,7 @@ class AssessmentService:
         hw = self.get_hardware_info()
         return {
             "model": "EfficientNet-B0 + JetX-GT Ensemble",
+            "model_name": "EfficientNet-B0 + JetX-GT Ensemble",
             "primary_model": PRIMARY_MODEL_VERSION,
             "secondary_model": SECONDARY_MODEL_VERSION,
             "fusion_version": ENSEMBLE_VERSION,

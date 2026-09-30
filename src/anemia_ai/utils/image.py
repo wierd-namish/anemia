@@ -25,3 +25,11 @@ def bytes_to_pil_image(image_bytes: bytes) -> Image.Image:
     if img.mode != "RGB":
         img = img.convert("RGB")
     return img
+
+
+def decode_base64_to_image(b64_string: str) -> Image.Image:
+    """Decodes a base64 or Data URI string into a PIL RGB Image."""
+    if "," in b64_string:
+        b64_string = b64_string.split(",", 1)[1]
+    raw_bytes = base64.b64decode(b64_string)
+    return bytes_to_pil_image(raw_bytes)
