@@ -1,4 +1,4 @@
-# Anemia AI — Fingernail-Based Anemia Assessment System
+# Anemia AI: Fingernail-Based Anemia Assessment System
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?logo=github)](https://wierd-namish.github.io/anemia/)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/wierd-namish/anemia)
