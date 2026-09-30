@@ -57,6 +57,8 @@
   const metricRiskScore = document.getElementById('metricRiskScore');
   const metricRiskCategory = document.getElementById('metricRiskCategory');
   const metricLatency = document.getElementById('metricLatency');
+  const metricDevice = document.getElementById('metricDevice');
+  const metricThreshold = document.getElementById('metricThreshold');
 
   // Probability Bar
   const probBarNumber = document.getElementById('probBarNumber');
