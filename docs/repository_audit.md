@@ -120,3 +120,13 @@ MYPASS/
 | **Model Smoke & Dependence** | **PASS** | Model outputs verified to be input-dependent. |
 | **OOD Surface Rejection** | **PASS** | Non-nail surfaces rejected without hallucinated output. |
 | **Backward Compatibility** | **PASS** | All legacy `backend.*` imports function seamlessly. |
+
+---
+
+## 5. Git Baseline Metadata
+
+- **Branch**: `main`
+- **Initial Baseline Commit**: `0bc38d02a7ff2d7bee7ce99ef4333c667375f817`
+- **Working Tree**: Clean (`git status` reports nothing to commit)
+- **Remote**: Not configured (Local repository initialized and ready for user remote assignment)
+
